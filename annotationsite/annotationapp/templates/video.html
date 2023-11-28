@@ -1,0 +1,43 @@
+{% extends "base1.html" %}
+<!--comment-->
+{% load static %} {% block centerFeed %}
+<!--Placeholder Video 1-->
+<iframe width="900" height="600" src="https://www.youtube.com/embed/zCO7p_Ov_9w"> </iframe>
+<h3>Ethan Ralph Is Riding The Felted Express To Copesville</h3>
+<div class="metadata">
+  <img src="{% static 'images/profile.png' %}" id="uploaderPic" alt="uploader" />
+  <div class="accDesc">
+    <h5>Dakka Dakka</h5>
+    <h6>4.2k Subscribers</h6>
+  </div>
+  <button id="subscribebtn">Subscribe</button>
+
+  <div class="likes">
+    <h3>{{ api.viewCount }} views</h3>
+    <img src="{% static 'images/like.png' %}" alt="likes" />
+    <h3>{{ api.likes }}</h3>
+    <img src="{% static 'images/dislike.png' %}" alt="dislikes" />
+    <h3>{{ api.dislikes }}</h3>
+  </div>
+</div>
+{% endblock %} {% block rightnav %}
+<div class="rightnav">
+  <ul id="rightmenu">
+    <li id="chatReplay" onclick="getChat()">Chat Replay</li>
+    <li id="dropdown">
+      Annotations
+      <ul id="dropdownMenu">
+        <li id="allAnnotations" onclick="getAnnotation()"><a href="#">All Annotations</a></li>
+        <li id="liveAnnotations" onclick="getAnnotation()"><a href="#">Live Annotations</a></li>
+        <li id="addAnnotations"><a href="{% url 'addAnnotation' %}">Add Annotations</a></li>
+      </ul>
+    </li>
+  </ul>
+  <div id="panel">
+    <h4><b>Chat Replay:</b></h4>
+    {% for value in chats %}
+    <p>{{ value.comment }}</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

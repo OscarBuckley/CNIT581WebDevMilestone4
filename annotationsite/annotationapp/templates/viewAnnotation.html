@@ -1,0 +1,34 @@
+{% extends "base1.html" %}
+<!--comment-->{% block centerFeed %} {% if user.is_authenticated %}
+<h1>View Annotation</h1>
+<div id="viewAnnotation">
+  <h3><b>Timestamp:</b> {{annotation.timestamp}}</h3>
+  <h3><b>Annotation:</b> {{annotation.annotation}}</h3>
+  <h3><b>Citation:</b> {{annotation.citation}}</h3>
+  <h3><b>Author:</b> {{annotation.author.username}}</h3>
+</div>
+<div id="annotationMenu">
+  <button id="returnDashboard">Return to Dashboard</button>
+  <button id="editAnnotation">Edit Annotation</button>
+
+  <!--Inline Javascript is required since standalone Javascript files do not take Django Templates-->
+  <script>
+    type = "text/javascript";
+    document.getElementById("returnDashboard").addEventListener("click", function () {
+      location.href = "{% url 'annotationList' %}";
+    });
+    document.getElementById("editAnnotation").addEventListener("click", function () {
+      location.href = "{% url 'editAnnotation' %}?id={{id}}";
+    });
+  </script>
+</div>
+{% else %}
+<div id="noLogin">
+  <h1>You must be logged in to see this page.</h1>
+  <h3>Click <a href="{% url 'login' %}">here</a> to log in!</h3>
+</div>
+{% endif %} {% endblock %} {% block rightnav %} {% if user.is_authenticated %}
+<div class="rightnav">
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/zCO7p_Ov_9w"> </iframe>
+</div>
+{% endif %} {% endblock %}

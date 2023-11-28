@@ -1,0 +1,7 @@
+Citations for images used in the Prototype
+
+favicon.png: https://www.freepik.com/icon/youtube_1383260
+hq720.webp: https://www.youtube.com/watch?v=zCO7p_Ov_9w
+profile.png: https://flyclipart.com/circled-user-icon-transparent-background-username-icon-moon-outer-space-night-hd-png-download-951294
+menu.png:https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Hamburger_icon_white.svg/1200px-Hamburger_icon_white.svg.png
+thumbnail.png: https://www.youtube.com/watch?v=8PUCSyIkEus

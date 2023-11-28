@@ -1,0 +1,30 @@
+{% extends "base1.html" %} {% load static %}
+<!--comment-->
+{% block centerFeed %}
+<!--Placeholder Video 1-->
+{% if user.is_authenticated %}
+<h1>Your Annotations</h1>
+{% for value in annotations %}
+<div class="video">
+  <img src="{% static 'images/hq720.webp' %}" alt="thumbnail" />
+  <div class="annotation">
+    <h3>
+      <a href="{% url 'annotationVideo' %}">Ethan Ralph Is Riding The Felted Express To Copesville</a>
+    </h3>
+    <h4><b>Your Annotation:</b></h4>
+    <p>
+      <b>{{ value.timestamp }}</b> -
+      <!--The following if statement truncates the comment if it's too long. This is required otherwise the CSS looks wonky-->
+      {% if value.annotation|length > 100 %} {{ value.annotation|slice:":100" }}... {% else %} {{ value.annotation }} {% endif %}<br />
+      <!--source-->
+      <b>Source:</b> <a href="{{ value.citation}}">{{ value.citation }}</a>
+    </p>
+    <b><a id="detailsLink" href="{% url 'viewAnnotation' %}?id={{value.id}}">See more information</a></b>
+  </div>
+</div>
+{% endfor %} {% else %}
+<div id="noLogin">
+  <h1>You must be logged in to see your annotations.</h1>
+  <h3>Click <a href="{% url 'login' %}">here</a> to log in!</h3>
+</div>
+{% endif %} {% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base1.html" %}
+<!--comment-->{% block centerFeed %} {% if user.is_authenticated %}
+<h1>Edit Annotations</h1>
+<form class="annotationTextboxes" method="post">
+  {% csrf_token %}
+  <input type="text" id="timestampField" name="timestamp" required pattern="^[0-6][0-9]:[0-6][0-9]:[0-6][0-9]$" placeholder="Timestamp (Required)" value="{{annotation.timestamp}}" />
+
+  <textarea id="annotationField" rows="10" name="annotation" placeholder="Annotation" required maxlength="500">{{annotation.annotation}}</textarea>
+
+  <input type="text" id="sourceLink" name="citation" required pattern="^(http)[s]?(:\/\/)(.{1,100})$" placeholder="Source Link" value="{{annotation.citation}}" />
+
+  <button id="submitAnnoBtn" type="submit" value="Submit">Save Changes</button>
+</form>
+{% else %}
+<div id="noLogin">
+  <h1>You must be logged in to see this page.</h1>
+  <h3>Click <a href="{% url 'login' %}">here</a> to log in!</h3>
+</div>
+{% endif %} {% endblock %} {% block rightnav %} {% if user.is_authenticated %}
+<div class="rightnav">
+  <iframe width="420" height="315" src="https://www.youtube.com/embed/zCO7p_Ov_9w"> </iframe>
+  <h3 id="referenceTitle"><b>Filter Annotations</b></h3>
+  <div id="panel">
+    {% for value in annotations %}
+    <p>{{ value.timestamp }}</p>
+    <p>{{ value.annotation }}<br /></p>
+    <p>Source: <a href="{{ value.citation }}">{{ value.citation }}</a></p>
+    {% endfor %}
+  </div>
+  <form class="liveSearch" method="post">
+    {% csrf_token %}
+    <input type="text" name="query" id="annotationSearch" placeholder="Search" onkeyup="liveSearch()" />
+  </form>
+</div>
+{% endif %} {% endblock %}

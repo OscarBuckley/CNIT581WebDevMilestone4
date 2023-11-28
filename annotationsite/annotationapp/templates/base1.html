@@ -1,0 +1,59 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="/static/css/stylesheet.css?{% now 'U' %}" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon.png' %}" />
+
+    <title>Youtube Annotations</title>
+  </head>
+  <body>
+    <!-- header bar -->
+    <div class="header">
+      <img src="{% static 'images/menu.png' %}" id="menuToggle" alt="hamburger" />
+      <img src="{% static 'images/favicon.png' %}" alt="logo" />
+      <div class="center">
+        <input type="text" id="searchbar" placeholder="Search" />
+        <button id="searchbtn">Search</button>
+      </div>
+      <div class="right">
+        {% if user.is_authenticated %}
+        <h5>Hi {{ user.username }}!</h5>
+        {% else %}
+        <h5><a href="{% url 'login' %}">Log in Here!</a></h5>
+        {% endif %}
+        <a href="{% url 'login' %}"><img src="{% static 'images/profile.png' %}" alt="profile" /></a>
+      </div>
+    </div>
+
+    <!-- navigation side bar -->
+    <div id="sidenav">
+      <ul class="navi">
+        <li>Home</li>
+        <li>Shorts</li>
+        <li>Subscriptions</li>
+        <li>Library</li>
+        <li>History</li>
+        <li>Your Videos</li>
+        <li>Watch Later</li>
+        <li>Liked Videos</li>
+        <li><a href="{% url 'annotationList' %}">Annotations</a></li>
+        <li>Show More</li>
+      </ul>
+
+      <ul class="about">
+        <li>Settings</li>
+        <li>About</li>
+        <li><a href="{% url 'logout' %}">Log Out</a></li>
+      </ul>
+    </div>
+
+    <div class="mainBody">
+      <!-- main content -->
+      <div class="content">{% block centerFeed %} {% endblock %}</div>
+      {% block rightnav %} {% endblock %}
+    </div>
+    <script src="{% static 'javascript/script.js' %}?{% now 'U' %}"></script>
+  </body>
+</html>
