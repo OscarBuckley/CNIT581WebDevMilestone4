@@ -70,14 +70,12 @@ def editAnnotation(request):
         raise Http404("The requested item cannot be found.")
 
 # Guide for converting Django Objects into JSON are taken from here https://www.letscodemore.com/blog/object-of-type-queryset-is-not-json-serializable/
-@login_required
 def getAnnotation(request):
     annotations = annotation.objects.all().order_by("timestamp")
     annotations = serialize("json", annotations)
     annotations = json.loads(annotations)
     return JsonResponse(annotations, safe=False)
 
-@login_required
 def getChat(request):
     chats = chat.objects.all().order_by("posted")
     chats = serialize("json", chats)
